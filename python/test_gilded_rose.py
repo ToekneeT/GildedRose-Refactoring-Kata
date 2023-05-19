@@ -102,13 +102,21 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(-1, items[0].sell_in)
         self.assertEqual(0, items[0].quality)
-        
+    
+    # Tests conjured quality. Makes sure it drops by 2, then past sell in by 4.
     def test_conjured(self):
-        items = [Item("Conjured Mana Cake", 10, 5)]
+        items = [Item("Conjured Mana Cake", 2, 8)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertEqual(9, items[0].sell_in)
-        self.assertEqual(3, items[0].quality)
+        self.assertEqual(1, items[0].sell_in)
+        self.assertEqual(6, items[0].quality)
+        gilded_rose.update_quality()
+        self.assertEqual(0, items[0].sell_in)
+        self.assertEqual(4, items[0].quality)
+        gilded_rose.update_quality()
+        self.assertEqual(-1, items[0].sell_in)
+        self.assertEqual(0, items[0].quality)
+
 
 if __name__ == '__main__':
     unittest.main()

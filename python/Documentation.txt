@@ -11,7 +11,12 @@ That is until the sell in is less than 0, by which the quality starts to drop by
  working.
  - What I found when running the unit test was that suddenly, the quality dropped from 5 to 2.
  - The issue came from me trying to continue with the current style of arrow code and used the conditional before
- another which led to it reducing the quality by 2 and then another 1. Easy fix.
+ another which led to it reducing the quality by 2 and then another 1. Easy fix, made sure the conditional happened
+ before the previous and changed it into an elif.
+
+ **Later update**
+ - Found that once the sell in date has passed, the conjured item doesn't drop in quality by 4, but by 3.
+ - Same fix as the last issue, just had to add and change a conditional that was under the sell in set.
 
  With the conjured items now working properly, the next step seems to be refactoring the code and making sure the unit
  tests still work properly as the code is changed.
