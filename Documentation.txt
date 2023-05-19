@@ -1,0 +1,17 @@
+Found the wording a tad confusing in the requirements doc; however, adding a few more days in the texttest_fixture.py
+has shown what the correct interaction cases the items.
+
+Noticed that the Conjured items are not working properly. Quality drops by one instead of the required 2.
+That is until the sell in is less than 0, by which the quality starts to drop by 2.
+ - To solve this, I wrote a unit test that would seemingly work with a conjured item.
+ - As expected, when the quality was 5, running the test would result in 4 instead of 3.
+ - To add the correct functionality, I split the name into pieces using the string split method. If the first piece was
+ "Conjured" it would reduce quality by 2.
+ - From there, I tried to add it into the update_quality function and would run the unit test when I thought it was
+ working.
+ - What I found when running the unit test was that suddenly, the quality dropped from 5 to 2.
+ - The issue came from me trying to continue with the current style of arrow code and used the conditional before
+ another which led to it reducing the quality by 2 and then another 1. Easy fix.
+
+ With the conjured items now working properly, the next step seems to be refactoring the code and making sure the unit
+ tests still work properly as the code is changed.
