@@ -1,3 +1,4 @@
+ - May 18th, 2023 -
 Found the wording a tad confusing in the requirements doc; however, adding a few more days in the texttest_fixture.py
 has shown what the correct interaction cases the items.
 
@@ -20,3 +21,11 @@ That is until the sell in is less than 0, by which the quality starts to drop by
 
  With the conjured items now working properly, the next step seems to be refactoring the code and making sure the unit
  tests still work properly as the code is changed.
+
+
+ - May 21st, 2023 - 
+Started to refactor the update_quality function.
+ - Had some issues, but running the unit tests helped debug where I was having problems.
+ - Was easier to change one section of conditionals at a time.
+ - Sell in conditionals were easier to change than the first quality set.
+ - Could probably revisit and have less nested conditionals.
