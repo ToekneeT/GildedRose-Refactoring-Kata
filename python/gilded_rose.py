@@ -7,32 +7,34 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
-            if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert":
-                if item.name.split()[0] == "Conjured" and item.quality > 0:
-                    item.quality -= 2
-                elif item.name != "Sulfuras, Hand of Ragnaros" and item.quality > 0:
-                    item.quality -= 1
-            else:
-                if item.name == "Aged Brie" and item.quality < 50:
-                    item.quality += 1
-                elif item.name == "Backstage passes to a TAFKAL80ETC concert" and item.quality < 50:
-                    item.quality += 1
-                    if item.sell_in < 11 and item.quality < 50:
-                        item.quality += 1
-                    if item.sell_in < 6 and item.quality < 50:
-                        item.quality += 1
             if item.name != "Sulfuras, Hand of Ragnaros":
                 item.sell_in -= 1
-            if item.sell_in < 0:
-                if item.name == "Aged Brie" and item.quality < 50:
+            if item.name == "Aged Brie":
+                if (item.quality < 50 and item.sell_in >= 0) or (item.quality == 49 and item.sell_in < 0):
                     item.quality += 1
-                elif item.name == "Backstage passes to a TAFKAL80ETC concert":
+                elif item.quality < 50 and item.sell_in < 0:
+                    item.quality += 2
+            elif item.name == "Backstage passes to a TAFKAL80ETC concert":
+                if item.sell_in < 0:
                     item.quality = 0
-                elif item.quality > 0 and item.name.split()[0] == "Conjured":
+                else:
+                    if item.quality < 50:
+                        item.quality += 1
+                    if item.sell_in < 10 and item.quality < 50:
+                        item.quality += 1
+                    if item.sell_in < 5 and item.quality < 50:
+                        item.quality += 1
+            elif item.name.split()[0] == "Conjured":
+                if item.sell_in >= 0:
                     item.quality -= 2
-                elif item.quality > 0 and item.name != "Sulfuras, Hand of Ragnaros":
+                else:
+                    item.quality -= 4
+            elif item.name != "Sulfuras, Hand of Ragnaros":
+                if (item.sell_in >= 0 and item.quality > 0) or (item.sell_in >= 0 and item.quality == 1):
                     item.quality -= 1
-            
+                elif item.sell_in < 0 and item.quality > 0:
+                    item.quality -= 2
+
 
 class Item:
     def __init__(self, name, sell_in, quality):

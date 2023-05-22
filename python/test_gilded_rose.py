@@ -56,6 +56,10 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(0, items[0].sell_in)
         self.assertEqual(50, items[0].quality)
+        items = [Item("Aged Brie", 0, 49)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(50, items[0].quality)
 
     # Sulfuras shouldn't go down in quality or sell in.
     def test_sulfuras(self):
@@ -89,11 +93,14 @@ class GildedRoseTest(unittest.TestCase):
 
     # Increases by 3 when less than 5 days.
     def test_backstage_five_less(self):
-        items = [Item("Backstage passes to a TAFKAL80ETC concert", 5, 0)]
+        items = [Item("Backstage passes to a TAFKAL80ETC concert", 6, 0)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
+        self.assertEqual(5, items[0].sell_in)
+        self.assertEqual(2, items[0].quality)
+        gilded_rose.update_quality()
         self.assertEqual(4, items[0].sell_in)
-        self.assertEqual(3, items[0].quality)
+        self.assertEqual(5, items[0].quality)
 
     # 0 after concert is over.
     def test_backstage_zero(self):

@@ -29,3 +29,12 @@ Started to refactor the update_quality function.
  - Was easier to change one section of conditionals at a time.
  - Sell in conditionals were easier to change than the first quality set.
  - Could probably revisit and have less nested conditionals.
+
+ Issues I ran into:
+  - When not using != "Aged Brie" and != "Backstage," the tests would fail against backstage and Aged Brie qualities.
+  That led to ultimately just using the != and else. 
+
+Started to try a different look at refactoring the code.
+- Found a new test that wasn't covered before. If quality is 49 and Brie is quality of 0. Then it fails as it should
+only add 1.
+- Also added some new unit testing for the backstaging when under 10 and 5.
